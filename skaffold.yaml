@@ -1,0 +1,36 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+metadata:
+  name: productmanager
+build:
+  artifacts:
+    - image: 566034038752.dkr.ecr.us-west-2.amazonaws.com/sykang/productmanager
+      docker:
+        dockerfile: Dockerfile
+  tagPolicy:
+    sha256: {}
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes-manifests/deployment.yaml
+---          
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: productmanager
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: productmanager
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          # scale up if usage is above
+          # 99% of the requested CPU (100m)
+          averageUtilization: 99

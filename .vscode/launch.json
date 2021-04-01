@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Kubernetes: Run/Debug",
+            "type": "cloudcode.kubernetes",
+            "request": "launch",
+            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+            "watch": true,
+            "cleanUp": true,
+            "portForward": true,
+            "imageRegistry": "566034038752.dkr.ecr.us-west-2.amazonaws.com/sykang",
+            "debug": [
+                {
+                    "image": "566034038752.dkr.ecr.us-west-2.amazonaws.com/sykang/productmanager",
+                    "sourceFileMap": {
+                        "${workspaceFolder}": "/www"
+                    }
+                }
+            ]
+        }
+    ]
+}

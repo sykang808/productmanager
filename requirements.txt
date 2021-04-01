@@ -1,0 +1,4 @@
+Flask>=1.1.2
+uwsgi>=2.0.19.1
+kafka-python>=2.0.2
+requests>=2.23.0

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productmanager
+  labels:
+    app: productmanager
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productmanager
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: productmanager
+    spec:
+      containers:
+      - image: 566034038752.dkr.ecr.us-west-2.amazonaws.com/sykang/productmanager:latest
+        imagePullPolicy: Always
+        name: productmanager
