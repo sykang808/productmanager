@@ -17,7 +17,7 @@ class ProductManager():
         # Poll kafka
         def poll():
             # Initialize consumer Instance
-            consumer = KafkaConsumer(topic, bootstrap_servers=BOOTSTRAP_SERVERS, auto_offset_reset='earliest', enable_auto_commit=True, 
+            consumer = KafkaConsumer(topic,security_protocol="SSL", bootstrap_servers=BOOTSTRAP_SERVERS, auto_offset_reset='earliest', enable_auto_commit=True, 
                                         group_id='my-mc' )
 
             print("About to start polling for topic:", topic)
