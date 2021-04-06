@@ -6,10 +6,10 @@ import requests
 import threading
 import json
 
-BOOTSTRAP_SERVERS = ['sykang-kafka.default.svc.cluster.local:9092']
+BOOTSTRAP_SERVERS = ['b-2.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094','b-1.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094']
 
 class ProductManager():
-    producer = KafkaProducer(acks=0, compression_type='gzip',security_protocol="SSL" ,bootstrap_servers=['b-2.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094','b-1.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094'], value_serializer=lambda v: json.dumps(v, sort_keys=True).encode('utf-8')) 
+    producer = KafkaProducer(acks=0, compression_type='gzip',security_protocol="SSL" ,bootstrap_servers=BOOTSTRAP_SERVERS, value_serializer=lambda v: json.dumps(v, sort_keys=True).encode('utf-8')) 
     ret_fin = 0
     ret_message = ''
 
