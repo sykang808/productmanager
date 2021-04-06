@@ -9,7 +9,7 @@ import json
 BOOTSTRAP_SERVERS = ['sykang-kafka.default.svc.cluster.local:9092']
 
 class ProductManager():
-    producer = KafkaProducer(acks=0, compression_type='gzip', bootstrap_servers='sykang-kafka-0.sykang-kafka-headless.default.svc.cluster.local:9092', value_serializer=lambda v: json.dumps(v, sort_keys=True).encode('utf-8'))  
+    producer = KafkaProducer(acks=0, compression_type='gzip',security_protocol="SSL" ,bootstrap_servers=['b-2.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094','b-1.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094'], value_serializer=lambda v: json.dumps(v, sort_keys=True).encode('utf-8')) 
     ret_fin = 0
     ret_message = ''
 
@@ -55,7 +55,7 @@ class ProductManager():
         if 'product_id' not in json_data:
             return;
 
-        url= 'http://flask-product-restapi:5050/product/' + str( json_data['product_id'])
+        url= 'http://flask-product-restapi.flask-product-restapi/product/' + str( json_data['product_id'])
         r = requests.get( url )
         if r.status_code == 200:
             ret_json = json.loads(r.content)
