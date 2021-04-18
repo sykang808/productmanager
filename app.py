@@ -55,7 +55,7 @@ class ProductManager():
         if 'product_id' not in json_data:
             return;
 
-        url= 'http://flask-product-restapi.flask-product-restapi/product/' + str( json_data['product_id'])
+        url= 'http://product.flask-restapi/product/' + str( json_data['product_id'])
         r = requests.get( url )
         if r.status_code == 200:
             ret_json = json.loads(r.content)
