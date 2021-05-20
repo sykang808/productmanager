@@ -5,6 +5,7 @@ from json import dumps
 import requests
 import threading
 import json
+import boto3
 
 BOOTSTRAP_SERVERS = ['b-2.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094','b-1.microservice-kafka-2.6lxf1h.c6.kafka.us-west-2.amazonaws.com:9094']
 cloudformation_client = boto3.client('cloudformation')
