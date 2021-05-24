@@ -33,7 +33,7 @@ BOOTSTRAP_SERVERS = response['Parameter']['Value'].split(',')
 
 
 class ProductManager():
-    producer = KafkaProducer(bootstrap_servers=BOOTSTRAP_SERVERS, security_protocol="SSL")    
+    producer = KafkaProducer(bootstrap_servers=BOOTSTRAP_SERVERS, security_protocol="SSL", value_serializer=lambda x: dumps(x).encode('utf-8'))    
     ret_fin = 0
     ret_message = ''
 
