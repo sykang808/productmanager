@@ -1,10 +1,9 @@
 from kafka import KafkaConsumer 
 from kafka import KafkaProducer 
+from flask import Flask
+import flask.scaffold
+flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
 from flask_restx import Api
-from flask_restx import Resource
-from flask import request # change
-from json import loads 
-from json import dumps 
 import requests
 import threading
 import json
@@ -12,7 +11,6 @@ import boto3
 from botocore.config import Config
 from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
-from flask import Flask
 
 app = Flask(__name__)
 api = Api(app)
