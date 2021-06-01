@@ -16,7 +16,7 @@ from flask import Flask
 
 app = Flask(__name__)
 api = Api(app)
-xray_recorder.configure(service='ordermanager')
+xray_recorder.configure(service='productmanager')
 XRayMiddleware(app, xray_recorder)
 
 my_config = Config(
