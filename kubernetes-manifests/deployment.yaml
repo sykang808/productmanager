@@ -14,11 +14,6 @@ spec:
   selector:
     matchLabels:
       app: productmanager
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -30,19 +25,24 @@ spec:
         name: productmanager
         ports:
         - containerPort: 80
-          protocol: TCP
+        resources:
+          limits:
+            cpu: 250m
+          requests:
+            cpu: 100m
 ---          
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: productmanager
-spec:
+  namespace: productmanager
+spec: 
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: productmanager
   minReplicas: 1
-  maxReplicas: 4
+  maxReplicas: 8
   metrics:
     - type: Resource
       resource:
@@ -51,4 +51,4 @@ spec:
           type: Utilization
           # scale up if usage is above
           # 99% of the requested CPU (100m)
-          averageUtilization: 99
+          averageUtilization: 50
